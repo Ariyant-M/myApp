@@ -1,0 +1,26 @@
+.products {
+  text-align: center;
+}
+.errorMessage {
+  color: red;
+}
+
+.btn {
+  margin: 10px !important;
+}
+.product-display {
+  box-shadow: 0 1px 1px rgb(0, 37, 17, 0.075) inset,
+    0 0 8px rgba(13, 110, 253, 0.5);
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 20px;
+}
+.product-alter {
+  background-color: rgb(215, 254, 255) !important;
+}
+.product-row {
+  margin-top: 30px;
+}
+.navbar {
+  margin-bottom: 30px;
+}
