@@ -3,16 +3,14 @@ $(document).ready(function () {
     var useremailjs = $("#fld_userEmail").val();
     var userPasswordjs = $("#fld_userPassword").val();
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "components/authentication.cfc",
       data: {
         method: "doLogin",
         fld_useremail: useremailjs,
         fld_userpassword: userPasswordjs,
       },
-      datatype: "json",
       success: function (data) {
-        console.log(data);
         if (data == "true") {
           window.location = "product.cfm";
         } else {
@@ -41,8 +39,3 @@ $(document).ready(function () {
     window.location = "newUser.cfm";
   });
 });
-$("#addNew").click(function() {
-  $.ajax({
-
-  })
-})

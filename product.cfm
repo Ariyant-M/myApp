@@ -75,35 +75,41 @@
 			<cfset local.productList = productObject.getAllProduct()>
 			<cfloop from="1" to ="#local.productList.RecordCount#" index= "i" step = 3>
 				<cfoutput>
-				<div class="row product-row">
-					<div class = "col-4">
-						<div class = "product-display">
-						<cfset local.data = QueryGetRow(productList, #i#) >
-						<h5><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						<p>#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-						</div>
+					<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
+					  <div class="col">
+					    <div class="card h-100">
+					      <div class="card-body">
+					      	<cfset local.data = QueryGetRow(productList, #i#) >
+					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+					      </div>
+					    </div>
+					  </div>
+					  <cfif #i# LT local.productList.RecordCount>
+					  <div class="col">
+					    <div class="card h-100">
+					      <div class="card-body">
+					      	<cfset i++>
+					      	<cfset local.data = QueryGetRow(productList, #i#) >
+					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+					      </div>
+					    </div>
+					  </div>
+					  </cfif>
+					  <cfif #i# LT local.productList.RecordCount>
+					  <div class="col">
+					    <div class="card h-100">
+					      <div class="card-body">
+					      	<cfset i++>
+					      	<cfset local.data = QueryGetRow(productList, #i#) >
+					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+					      </div>
+					    </div>
+					  </div>
+					  </cfif>
 					</div>
-					<cfif #i# LT local.productList.RecordCount>
-					<div class = "col-4">
-						<div class = "product-display">
-						<cfset i++>
-						<cfset data = QueryGetRow(productList, #i#) >
-						<h5><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						<p>#left("#data.FLD_PRODUCTDETAILS#",100)#...</p>
-						</div>
-					</div>
-					</cfif>
-					<cfif #i# LT local.productList.RecordCount>
-					<div class = "col-4">
-						<div class = "product-display">
-						<cfset i++>
-						<cfset data = QueryGetRow(productList, #i#) >
-						<h5><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						<p>#left("#data.FLD_PRODUCTDETAILS#",100)#...</p>
-						</div>
-					</div>
-					</cfif>
-				</div>
 				</cfoutput>
 			</cfloop>
 	    </div>

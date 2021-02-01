@@ -12,8 +12,31 @@
 		<script src="https://kit.fontawesome.com/ee6f18f199.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<cfset a = 4 >
-		<cfset local.updateProductObject = createObject('component', "components.getProductDetails").getProductByID(#a#)>
-		<cfdump var="#local.updateProductObject#">
+
+		<div id="A"></div>
+		<script type="text/javascript">
+			var ag = 37;
+			var aa = "hello lol";
+			var ab = "done done";
+			$.ajax({
+		        type: "POST",
+		        url: "components/test.cfc",
+		        data: {
+		          method: "dummy",
+		          productID: ag,
+		          productName: aa,
+		          productDetails: ab,
+		        },
+		        success: function (data) {
+		          if(data == "true")
+		          {
+		          	alert(data);
+		          }
+		          else{
+		          	alert(data);
+		          }
+		        },
+		      });
+		</script>
 	</body>
 </html>

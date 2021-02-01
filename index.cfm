@@ -1,23 +1,3 @@
-<!---validate user from database--->
-<!---<cfif structKeyExists(form,"fld_submitLogin")>
-	<cfquery datasource="myAppDB" name="op">
-		SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL
-		FROM TBL_USERS
-		WHERE FLD_USEREMAIL = "#form.fld_userEmail#" AND FLD_USERPASSWORD = "#form.fld_userPassword#"
-	</cfquery>
-	<cfif op.recordCount EQ 1>
-		<cflock timeout= "2" scope="Session">
-			<cfset session.LoggedUser = {firstName = "#op.FLD_USERFIRSTNAME#", lastName = "#op.FLD_USERLASTNAME#", userID = "#op.FLD_USERID#" }>
-		</cflock>
-		<cflocation url="http://127.0.0.1:8500/myApp/product.cfm">
-
-	<cfelse>
-
-		<cfset errorLogin = "invalid credentials">
-	</cfif>
-
-</cfif>--->
-<!--- <cfset checkLogin = loggedUser.doLogin(form.)> --->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,14 +10,14 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="https://kit.fontawesome.com/ee6f18f199.js" crossorigin="anonymous"></script>
-		<script src="./JavaScript/login.js"></script>
+		<script src="./JavaScript/authentication.js"></script>
 	</head>
 	<body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand">myApp</a>
 		      <div class="d-flex">
-		        <button class="btn btn-primary" id="registration" onclick = "regFunction()">Sign Up <i class="fas fa-user-plus"></i></button>
+		        <button class="btn btn-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
 		      </div>
 		    </div>
 		</nav>
@@ -81,7 +61,7 @@
                 />
 				<small>much be more then 5 letter</small>
               </div>
-              <button class="btn btn-primary" value="submit" name="fld_submitLogin" id="fld_submitLogin" onclick="doLogin();">Submit</button>
+              <button class="btn btn-primary" value="submit" name="fld_submitLogin" id="fld_submitLogin" >Submit</button>
             </fieldset>
 			</cfif>
           </form>

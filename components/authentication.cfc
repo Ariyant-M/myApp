@@ -6,53 +6,45 @@
   --- date:   25/1/21
   --->
 <cfcomponent output="false">
-	<cffunction name="doLogin" access="remote" returnType="boolean" >
+
+	<!--- validate user in credentials from database, if user is valid then log in them--->
+	<cffunction name="doLogin" access="remote" returnType="boolean" returnformat="plain">
 		<cfargument name="fld_useremail" required="true" type="string">
 		<cfargument name="fld_userpassword" required="true" type="string">
-		<cfset var loginStatus = false>
-		<cfquery datasource="myAppDB" name="userdata">
-			SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL
-			FROM TBL_USERS
-			WHERE FLD_USEREMAIL = <cfqueryparam value= "#arguments.fld_useremail#" cfsqltype="cf_sql_varchar" />
-			AND FLD_USERPASSWORD = <cfqueryparam value= "#arguments.fld_userpassword#" cfsqltype="cf_sql_varchar" />
-		</cfquery>
+		<cfset local.loginStatus = false>
+		<cftry>
+			<cfquery name="userdata">
+				SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL
+				FROM TBL_USERS
+				WHERE FLD_USEREMAIL = <cfqueryparam value= "#arguments.fld_useremail#" cfsqltype="cf_sql_varchar" />
+				AND FLD_USERPASSWORD = <cfqueryparam value= "#arguments.fld_userpassword#" cfsqltype="cf_sql_varchar" />
+			</cfquery>
+			<cfcatch>
+				<cflog text="error in user login: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
+				<cfset local.loginStatus = false>
+				<cfreturn local.loginStatus>
+			</cfcatch>
+		</cftry>
 		<cfif userdata.recordCount EQ 1>
 			<cflock timeout= "2" scope="Session">
 				<cfset session.LoggedUser = {firstName = "#userdata.FLD_USERFIRSTNAME#", lastName = "#userdata.FLD_USERLASTNAME#", userID = "#userdata.FLD_USERID#" }>
 			</cflock>
-			<cfset variables.loginStatus = true>
-
+			<cfset local.loginStatus = true>
 		</cfif>
 
-		<cfreturn variables.loginStatus>
+		<cfreturn local.loginStatus>
 	</cffunction>
 
-	<cffunction name="doLogout" access="remote" returnType="boolean" returnformat="JSON">
+	<!--- logout the user --->
+	<cffunction name="doLogout" access="remote" returnType="boolean" returnformat="plain">
 		<cfset structdelete(session,'LoggedUser') />
-		<cfset loginStatus = true>
-		<cfset q = serializeJSON(loginStatus,"struct")>
-		<cfreturn q>
+		<cfif structKeyExists(session, 'LoggedUser')>
+			<cfset local.loginStatus = false>
+		<cfelse>
+			<cfset local.loginStatus = true>
+		</cfif>
+		<cfreturn local.loginStatus>
 	</cffunction>
 
-	<cffunction name="newUser" access="remote" returntype="boolean">
-		<cfset local.status = false>
-		<cfargument name="firstName" required="true" type="string">
-		<cfargument name="lastName" required="true" type="string">
-		<cfargument name="userMail" required="true" type="string">
-		<cfargument name="userPassword" required="true" type="string">
-		<cftry>
-		<cfquery>
-			INSERT INTO TBL_USERS(FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD)
-			VALUES (<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.firstName#">, 
-				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.lastName#">, 
-				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.userMail#">,
-				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.userPassword#">)
-		</cfquery>
-		<cfcatch>
-			<cfset local.status = false>
-		</cfcatch>
-			<cfset local.status = true>
-		</cftry>
-		<cfreturn local.status>
-	</cffunction>
+
 </cfcomponent>
