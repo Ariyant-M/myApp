@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $("#fld_submitLogin").click(function () {
-    var useremailjs = $("#fld_userEmail").val();
+    event.preventDefault();
+    var useremailjs = $("#fld_userEmail").val().trim();
     var userPasswordjs = $("#fld_userPassword").val();
     $.ajax({
       type: "GET",

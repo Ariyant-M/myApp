@@ -12,31 +12,24 @@
 		<script src="https://kit.fontawesome.com/ee6f18f199.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<cfif isDefined(url.productID)>
+			<cflocation url="errorFile.html">
+		<cfelse>
+			
+			<cfheader name="Content-Disposition" value="attachment; filename=myDoc.pdf">
 
-		<div id="A"></div>
-		<script type="text/javascript">
-			var ag = 37;
-			var aa = "hello lol";
-			var ab = "done done";
-			$.ajax({
-		        type: "POST",
-		        url: "components/test.cfc",
-		        data: {
-		          method: "dummy",
-		          productID: ag,
-		          productName: aa,
-		          productDetails: ab,
-		        },
-		        success: function (data) {
-		          if(data == "true")
-		          {
-		          	alert(data);
-		          }
-		          else{
-		          	alert(data);
-		          }
-		        },
-		      });
-		</script>
+			<cfcontent type="application/pdf">
+
+			<cfdocument format="PDF">
+
+			  <cfoutput>
+		        <cfset variables.productData = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
+		        <small id="pID">Product ID: #variables.productData.FLD_PRODUCTID#</small>
+		        <h1 id="pName">Product Name: #variables.productData.FLD_PRODUCTNAME#</h1>
+		        <h3 id="pDetails">Product Details: #variables.productData.FLD_PRODUCTDETAILS#</h3>
+		      </cfoutput>
+
+			</cfdocument>
+		</cfif>
 	</body>
 </html>

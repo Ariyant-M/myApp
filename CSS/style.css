@@ -24,3 +24,9 @@
 .navbar {
   margin-bottom: 30px;
 }
+.hiddenError{
+  visibility: hidden;
+}
+.colorRed{
+  color: red;
+}

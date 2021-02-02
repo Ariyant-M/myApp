@@ -25,8 +25,9 @@ $(document).ready(function () {
   });
   
   $("#addNewProduct").click(function() {
-    var newProductNamejs = $("#newProductName").val();
-    var newProductDetailsjs = $("#newProductDetails").val();
+    event.preventDefault();
+    var newProductNamejs = $("#newProductName").val().trim();
+    var newProductDetailsjs = $("#newProductDetails").val().trim();
     if(newProductNamejs != '' && newProductDetailsjs != ''){
       $.ajax({
         type: "POST",
@@ -36,7 +37,6 @@ $(document).ready(function () {
                 newProductDetails: newProductDetailsjs,
               },
         success: function (newData) {
-          alert(newData);
           if(newData == "true"){
             alert("data added");
             window.location = "product.cfm";
@@ -65,6 +65,16 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  $("#ExportPDF").click(function () {
+    var urlParams = new URLSearchParams(window.location.search);
+    var productID = urlParams.get("productID");
+    window.open("ExportAsPDF.cfm?productID=" + productID,'_blank');
+  });
+
+  $("#ExportExcel").click(function () {
+    alert("hello1");
   });
   $("#confirm").attr("data-bs-dismiss", "modal");
 });
