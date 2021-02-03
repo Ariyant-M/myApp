@@ -15,7 +15,7 @@ $(document).ready(function () {
         if (data == "true") {
           window.location = "product.cfm";
         } else {
-          alert("invalid user details..");
+          alert("invalid user details");
         }
       },
     });

@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Add User</title>
-	<!--- css style link --->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="CSS/style.css">
-	<!---bootstrap CDN--->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-	<script src="JavaScript/jquery-3.5.1.js"></script>
-	<script src="JavaScript/newUser.js"></script>
-</head>
-<body>
+<cfmodule template="customTags/basePage.cfm" title = "Sign Up">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
 	    <a class="navbar-brand" href="index.cfm">myApp</a>
@@ -54,5 +42,6 @@
 		</div>
 	<div class="col"></div>
 	</div>
-</body>
-</html>
+	</div>
+	<script src="JavaScript/newUser.js"></script>
+</cfmodule>

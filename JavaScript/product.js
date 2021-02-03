@@ -74,7 +74,9 @@ $(document).ready(function () {
   });
 
   $("#ExportExcel").click(function () {
-    alert("hello1");
+    var urlParams = new URLSearchParams(window.location.search);
+    var productID = urlParams.get("productID");
+    window.open("exportAsExcel.cfm?productID=" + productID,'_blank');
   });
   $("#confirm").attr("data-bs-dismiss", "modal");
 });

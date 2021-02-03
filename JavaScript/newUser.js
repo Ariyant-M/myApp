@@ -1,20 +1,20 @@
 $(document).ready(function () {
-	var fldError = true;
+	var fldError = [5];
     $("#UserFirstName").focusout(function(){
     	var pattern = /^[A-Za-z]+$/;
     	var fName = $("#UserFirstName").val().trim();
 
     	if(fName == '' ){
     		$("#fNameError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[0] = true;
     	}
     	else if(pattern.test(fName) == false){
     		$("#fNameError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[0] = true;
     	}
     	else{
     		$("#fNameError").addClass("hiddenError");
-    		fldError = false;
+    		fldError[0] = false;
     	}
     });
 
@@ -24,15 +24,15 @@ $(document).ready(function () {
 
     	if(lName == '' ){
     		$("#lNameError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[1] = true;
     	}
     	else if(pattern.test(lName) == false){
     		$("#lNameError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[1] = true;
     	}
     	else{
     		$("#lNameError").addClass("hiddenError");
-    		fldError = false;
+    		fldError[1] = false;
     	}
     });
 
@@ -42,15 +42,15 @@ $(document).ready(function () {
 
     	if(userEmail == '' ){
     		$("#emailError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[2] = true;
     	}
     	else if(pattern.test(userEmail) == false){
     		$("#emailError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[2] = true;
     	}
     	else{
     		$("#emailError").addClass("hiddenError");
-    		fldError = false;
+    		fldError[2] = false;
     	}
     });
 
@@ -60,15 +60,15 @@ $(document).ready(function () {
 
     	if(userPass == '' ){
     		$("#passError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[3] = true;
     	}
     	else if(pattern.test(userPass) == false){
     		$("#passError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[3] = true;
     	}
     	else{
     		$("#passError").addClass("hiddenError");
-    		fldError = false;
+    		fldError[3] = false;
     	}
     });
 
@@ -77,17 +77,17 @@ $(document).ready(function () {
 
     	if(conUserPass == '' ){
     		$("#conPassError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[4] = true;
     		$("#conPassError").text("invalid input");
     	}
     	else if(conUserPass != userPass){
     		$("#conPassError").removeClass("hiddenError");
-    		fldError = true;
+    		fldError[4] = true;
     		$("#conPassError").text("password doesn't match");
     	}
     	else{
     		$("#conPassError").addClass("hiddenError");
-    		fldError = false;
+    		fldError[4] = false;
     	}
     });
 
@@ -98,47 +98,47 @@ $(document).ready(function () {
     	var userEmailID = $("#UserMail").val().trim();
     	var userPass = $("#UserPass").val().trim();
     	var conUserPass = $("#UserPassCon").val().trim();
-    	if(fldError == true){
-    		alert('fields can not be empty');
+    	if(jQuery.inArray(true, fldError) !== -1){
+    		alert('please fill the form properly');
     	}
-    	else if(fName == '' && lName == '' && userEmailID == '' && userPass == '' && conUserPass == ''){
-    		alert('fields can not be empty');
+    	else if(fName != '' && lName != '' && userEmailID != '' && userPass != '' && conUserPass != ''){
+            $.ajax({
+              type: "POST",
+              url: "components/authentication.cfc",
+              data: {
+                method: "checkEmailExist",
+                checkEmail: userEmailID,
+              },
+              success: function (data) {
+                if (data == "true") {
+                  alert("email already exist.");
+                } else {
+                    $.ajax({
+                      type: "POST",
+                      url: "components/authentication.cfc",
+                      data: {
+                        method: "addUser",
+                        firstName: fName,
+                        lastName: lName,
+                        userEmail: userEmailID,
+                        userPwd: userPass,
+                      },
+                      success: function (data) {
+                        if (data == "true") {
+                            alert("user added")
+                            window.location = "index.cfm";
+                        } else {
+                          alert("failed to add user..");
+                        }
+                      },
+                    });
+                }
+              },
+            });
     	}
     	else{
-    		alert("in else");
-    		// $.ajax({
-		    //   type: "POST",
-		    //   url: "components/authentication.cfc",
-		    //   data: {
-		    //     method: "checkEmailExist",
-		    //     checkEmail: userEmailID,
-		    //   },
-		    //   success: function (data) {
-		    //     if (data == "true") {
-		    //     	$.ajax({
-				  //     type: "POST",
-				  //     url: "components/authentication.cfc",
-				  //     data: {
-				  //       method: "addUser",
-				  //       firstName: fName,
-				  //       lastName: lName,
-				  //       userEmail: userEmailID,
-				  //       userPwd: userPass,
-				  //     },
-				  //     success: function (data) {
-				  //       if (data == "true") {
-				  //       	alert("user added")
-				  //         	window.location = "index.cfm";
-				  //       } else {
-				  //         alert("failed to add user..");
-				  //       }
-				  //     },
-				  //   });
-		    //     } else {
-		    //       alert("email already exist.");
-		    //     }
-		    //   },
-		    // });
+            alert('fields can not be empty');
+    		
     	}
     });
 });

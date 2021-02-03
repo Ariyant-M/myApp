@@ -19,16 +19,16 @@
 				FLD_PRODUCTDETAILS = <cfqueryparam value= "#arguments.productDetails#" cfsqltype="cf_sql_varchar" />
 				WHERE FLD_PRODUCTID = <cfqueryparam value= "#arguments.productID#" cfsqltype="CF_SQL_INTEGER" />;
 			</cfquery>
-			<cfcatch>
+			<cfif editResult.sql EQ ''>
+				<cfreturn false>
+			<cfelse>
+				<cfreturn true>
+			</cfif>
+		<cfcatch>
 				<cflog text="error in editing product: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
 				<cfreturn false>
 			</cfcatch>
 		</cftry>
-		<cfif editResult.sql EQ ''>
-			<cfreturn false>
-		<cfelse>
-			<cfreturn true>
-		</cfif>
 	</cffunction>
 
 	<!--- Add new Product data to database --->
@@ -43,16 +43,16 @@
 					<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.newProductDetails#">
 					)
 			</cfquery>
-			<cfcatch>
+			<cfif local.newProductResult.sql EQ ''>
+				<cfreturn "false">
+			<cfelse>
+				<cfreturn "true">
+			</cfif>
+		<cfcatch>
 				<cflog text="error in user login: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
 				<cfreturn "false">
 			</cfcatch>
 		</cftry>
-		<cfif local.newProductResult.sql EQ ''>
-			<cfreturn "false">
-		<cfelse>
-			<cfreturn "true">
-		</cfif>
 	</cffunction>
 
 	<!--- Delete product from the database --->
@@ -63,11 +63,11 @@
 				DELETE FROM TBL_PRODUCTLIST
 				WHERE FLD_PRODUCTID = <cfqueryparam value= "#arguments.productID#" cfsqltype="CF_SQL_INTEGER" />
 			</cfquery>
-			<cfcatch>
+			<cfreturn true>
+		<cfcatch>
 				<cflog text="error in user login: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
 				<cfreturn false>
 			</cfcatch>
 		</cftry>
-		<cfreturn true>
 	</cffunction>
 </cfcomponent>

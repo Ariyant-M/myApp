@@ -8,9 +8,9 @@ $(document).ready(function () {
     if(productNamejs != '' && productDetailsjs != ''){
       $.ajax({
             type: "POST",
-            url: "components/test.cfc",
+            url: "components/updateProductDetails.cfc",
             data: {
-              method: "dummy",
+              method: "editProduct",
               productID: productIDjs,
               productName: productNamejs,
               productDetails: productDetailsjs,
