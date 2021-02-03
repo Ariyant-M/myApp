@@ -30,5 +30,5 @@
 			<cflocation url="index.cfm">
 		</cfif>
 		</div>
-		<script src="JavaScript/edit.js"></script>
+		<script src="JavaScript/editProduct.js"></script>
 </cfmodule> 

@@ -22,8 +22,7 @@
 				<cfset spreadsheetFormatRow(sheetObj,
 					{
 						bold=true,
-						fgcolor="lemon_chiffon",
-						fontsize=14
+						fontsize=10
 					}, 1)>
 				<cfset spreadsheetAddRows(sheetObj, local.allProductData)>
 				<cfheader name="content-disposition" value="attachment; filename=ProductAll.xls">

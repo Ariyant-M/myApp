@@ -2,7 +2,7 @@ $(document).ready(function () {
   $("#editProduct").click(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var productID = urlParams.get("productID");
-    window.location = "edit.cfm?productID=" + productID;
+    window.location = "editProduct.cfm?productID=" + productID;
   });
 
   $("#confirmDelete").click(function () {
