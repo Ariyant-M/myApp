@@ -5,18 +5,21 @@
   --- author: Ariyantm
   --- date:   25/1/21
   --->
-<cfcomponent output="false">
+<cfcomponent displayname="authenticateUser" output="false" extends="logError" 
+	hint="Check user data form the users database and validate the given input">
 
 	<!--- validate user in credentials from database, if user is valid then log in them--->
 	<cffunction name="doLogin" access="remote" returnType="boolean" returnformat="plain">
 		<cfargument name="fld_useremail" required="true" type="string">
 		<cfargument name="fld_userpassword" required="true" type="string">
+		<cfset var hashPwd = hash(arguments.fld_userpassword)>
+		<cfset var userdata = "">
 		<cftry>
 			<cfquery name="userdata">
 				SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL
 				FROM TBL_USERS
 				WHERE FLD_USEREMAIL = <cfqueryparam value= "#arguments.fld_useremail#" cfsqltype="cf_sql_varchar" />
-				AND BINARY FLD_USERPASSWORD = <cfqueryparam value= "#arguments.fld_userpassword#" cfsqltype="cf_sql_varchar" />
+				AND BINARY FLD_USERPASSWORD = <cfqueryparam value= "#hashPwd#" cfsqltype="cf_sql_varchar" />
 			</cfquery>
 			<cfif userdata.recordCount EQ 1>
 				<cflock timeout= "2" scope="Session">
@@ -27,8 +30,8 @@
 				<cfreturn false>
 			</cfif>
 		<cfcatch>
-				<cflog text="error in user login: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
-				<cfreturn false>
+				<cfset var logErrorMessage = "Error while logging in user.">
+				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 			</cfcatch>
 		</cftry>
 	</cffunction>
@@ -43,8 +46,8 @@
 				<cfreturn true>
 		</cfif>
 		<cfcatch>
-			<cflog type="error" text="error in user logout: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
-				<cfreturn false>
+			<cfset var logErrorMessage = "Error while logging out user.">
+			<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 			</cfcatch>
 		</cftry>
 	</cffunction>
@@ -55,6 +58,8 @@
 		<cfargument name="lastName" required="true" type="string">
 		<cfargument name="userEmail" required="true" type="string">
 		<cfargument name="userPwd" required="true" type="string">
+		<cfset var hashPwd = hash(arguments.userPwd)>
+		<cfset var addUserResult = "">
 		<cftry>
 			<cfquery result="addUserResult">
 				INSERT INTO TBL_USERS( FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD)
@@ -62,7 +67,7 @@
 					<cfqueryparam value= "#arguments.firstName#" cfsqltype="cf_sql_varchar" />,
 					<cfqueryparam value= "#arguments.lastName#" cfsqltype="cf_sql_varchar" />,
 					<cfqueryparam value= "#arguments.userEmail#" cfsqltype="cf_sql_varchar" />,
-					<cfqueryparam value= "#arguments.userPwd#" cfsqltype="cf_sql_varchar" />
+					<cfqueryparam value= "#hashPwd#" cfsqltype="cf_sql_varchar" />
 					)
 			</cfquery>
 			<cfif addUserResult.sql NEQ ''>
@@ -71,8 +76,8 @@
 				<cfreturn false>
 			</cfif>
 		<cfcatch>
-				<cflog text="error in adding new user: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
-				<cfreturn false>
+				<cfset var logErrorMessage = "Error in adding new user.">
+				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 			</cfcatch>
 		</cftry>
 	</cffunction>
@@ -80,6 +85,8 @@
 	<!--- check if a given email ID exist or not. Used in user sign up --->
 	<cffunction name="checkEmailExist" access="remote" returntype="boolean" returnformat="plain">
 		<cfargument name="checkEmail" required="true" type="string">
+		<cfset var checkMail = "">
+		<cfset var checkEmailResult = "">
 		<cftry>
 			<cfquery result = "checkEmailResult" name="checkMail">
 				select FLD_USERID FROM TBL_USERS
@@ -91,8 +98,8 @@
 				<cfreturn false>
 			</cfif>
 		<cfcatch>
-			<cflog text="error in checking Email: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
-			<cfreturn false>
+			<cfset var logErrorMessage = "Error in checking Email.">
+			<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 		</cfcatch>
 	</cftry>
 	</cffunction>

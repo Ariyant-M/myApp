@@ -14,10 +14,15 @@ $(document).ready(function () {
       success: function (data) {
         if (data == "true") {
           window.location = "product.cfm";
-        } else {
+        } else if (data == "false") {
           alert("invalid user details");
+        } else{
+          window.location = "errorPage.html";
         }
       },
+      error: function (xhr, textStatus, errorThrown){
+        console.log(errorThrown); 
+      }
     });
   });
   $("#logout").click(function () {
@@ -30,10 +35,15 @@ $(document).ready(function () {
         console.log(data);
         if (data == "true") {
           window.location = "index.cfm";
-        } else {
+        } else if (data == "false") {
           alert("logout failed..");
+        } else{
+          window.location = "errorPage.html";
         }
       },
+      error: function (xhr, textStatus, errorThrown){
+        console.log(errorThrown); 
+      }
     });
   });
   $("#registration").click(function() {

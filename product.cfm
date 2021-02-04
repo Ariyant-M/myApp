@@ -6,10 +6,10 @@
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
-		        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit</button>
+		        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
 		        <!-- Button trigger modal -->
 				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
-				  Delete
+				  Delete <i class="fas fa-trash-alt"></i>
 				</button>
 
 				<!-- Modal -->
@@ -43,17 +43,17 @@
 			<h3 id="pDetails">#productDetails.FLD_PRODUCTDETAILS#</h3>
 			</div>
 		</cfoutput>
-		<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF</button>
-		<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel</button>
+		<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
+		<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
 		</div>
 	<cfelse>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
-				<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF</button>
-				<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel</button>
-		      	<button class="btn btn-primary" id="addNew" onclick="location.href = 'newProduct.cfm';">New <i class="fas fa-plus"></i></button>
+				<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
+				<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
+		      	<button class="btn btn-primary" id="addNew" onclick="location.href = 'newProduct.cfm';">New Product <i class="fas fa-plus"></i></button>
 		        <button class="btn btn-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
 		      </div>
 		    </div>

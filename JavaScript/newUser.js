@@ -112,7 +112,7 @@ $(document).ready(function () {
               success: function (data) {
                 if (data == "true") {
                   alert("email already exist.");
-                } else {
+                } else if (data == "false") {
                     $.ajax({
                       type: "POST",
                       url: "components/authentication.cfc",
@@ -127,13 +127,24 @@ $(document).ready(function () {
                         if (data == "true") {
                             alert("user added")
                             window.location = "index.cfm";
-                        } else {
+                        } else if (data == "false") {
                           alert("failed to add user..");
                         }
+                        else{
+                          window.location = "errorPage.html";
+                        }
                       },
+                      error: function (xhr, textStatus, errorThrown){
+                        console.log(errorThrown); 
+                      }
                     });
+                } else{
+                  window.location = "errorPage.html";
                 }
               },
+              error: function (xhr, textStatus, errorThrown){
+                console.log(errorThrown); 
+              }
             });
     	}
     	else{

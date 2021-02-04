@@ -1,4 +1,6 @@
-<cfcomponent output="false">
+<cfcomponent displayname="productDetails" output="false" extends="logError" 
+	hint="fetch all the details of product">
+
 	<!--- return product details of the given ID --->
 	<cffunction name="getProductByID" returntype="query">
 		<cfargument name="productID" required="true" type="numeric">
@@ -10,7 +12,8 @@
 			</cfquery>
 			<cfreturn local.detailsByID>
 		<cfcatch type="database">
-				<cflog text="failed to get product by ID: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
+				<cfset var logErrorMessage = "Error while getting product by ID.">
+				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 			</cfcatch>
 		</cftry>
 	</cffunction>
@@ -24,7 +27,8 @@
 			</cfquery>
 			<cfreturn local.product>
 		<cfcatch type="database">
-				<cflog text="failed to get all product details: #cfcatch.type# , #cfcatch.detail#" file="myAppError">
+				<cfset var logErrorMessage = "Error while get all product.">
+				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
 			</cfcatch>
 		</cftry>
 	</cffunction>

@@ -20,11 +20,15 @@ $(document).ready(function () {
               {
                 alert("updation successful");
                 window.location = "product.cfm";
-              }
-              else{
+              } else if (data == "false"){
                 alert("failed");
+              } else{
+                window.location = "errorPage.html";
               }
             },
+            error: function (xhr, textStatus, errorThrown){
+              console.log(errorThrown); 
+            }
           });
   }
   else{

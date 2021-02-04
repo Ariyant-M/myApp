@@ -16,11 +16,15 @@ $(document).ready(function () {
         if(data == "true"){
           alert("data deleted..");
           window.location = "product.cfm";
-        }
-        else{
+        } else if (data == "false"){
           alert("failed to delete");
+        } else{
+          window.location = "errorPage.html";
         }
       },
+      error: function (xhr, textStatus, errorThrown){
+        console.log(errorThrown); 
+      }
     });
   });
   
@@ -40,11 +44,15 @@ $(document).ready(function () {
           if(newData == "true"){
             alert("data added");
             window.location = "product.cfm";
-          }
-          else{
+          } else if (newData == "false") {
             alert("failed to add new data..");
+          } else {
+            window.location = "errorPage.html";
           }
         },
+        error: function (xhr, textStatus, errorThrown){
+          console.log(errorThrown); 
+        }
       });
     }
     else{
@@ -60,10 +68,15 @@ $(document).ready(function () {
         console.log(data);
         if (data == "true") {
           window.location = "index.cfm";
-        } else {
+        } else if (data == "false") {
           alert("logout failed..");
+        } else {
+          window.location = "errorPage.html";
         }
       },
+      error: function (xhr, textStatus, errorThrown){
+        console.log(errorThrown); 
+      }
     });
   });
 
