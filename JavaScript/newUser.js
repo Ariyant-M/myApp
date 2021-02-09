@@ -125,7 +125,19 @@ $(document).ready(function () {
                       },
                       success: function (data) {
                         if (data == "true") {
-                            alert("user added")
+                            $.ajax({
+                              type: "POST",
+                              url: "components/mail.cfc",
+                              data: {
+                                method: "sendMail",
+                                mailTo: userEmailID,
+                              },
+                              success: function (data) {
+                                if (data == "true") {
+                                    alert("User Added");
+                                }
+                              },
+                            });
                             window.location = "index.cfm";
                         } else if (data == "false") {
                           alert("failed to add user..");

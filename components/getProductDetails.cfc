@@ -14,7 +14,7 @@
 		<cfcatch type="database">
 				<cfset var logErrorMessage = "Error while getting product by ID.">
 				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
-			</cfcatch>
+		</cfcatch>
 		</cftry>
 	</cffunction>
 

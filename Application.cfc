@@ -13,6 +13,11 @@
 	<cfset this.customTagPaths = expandPath('/myApp/customTags') />
 	<cfset this.sessionManagement = "true">
 	<cfset this.sessionTimeout = #CreateTimeSpan(0,0,10,0)#>
+	<cfset this.sessioncookie.httponly = true /> 
+	<cfset this.sessioncookie.timeout = "10"  />
+	<cfset this.sessioncookie.secure = true  /> 
+	<cfset this.sessioncookie.disableupdate = true />
+	<cfset THIS.SetClientCookies = true />
 	<!---OnApplicationStart method--->
 	<cffunction
 		name="OnApplicationStart"

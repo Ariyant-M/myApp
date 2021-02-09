@@ -30,3 +30,20 @@
 .colorRed{
   color: red;
 }
+footer{
+  background-color: #E8F0FE;
+  margin-top: 100px;
+  padding-bottom: 50px;
+  height: 150px;
+}
+.center{
+  text-align: center;
+}
+#footerItem{
+   margin: 0 auto;
+   text-align: center;
+   word-spacing: 50px;
+}
+#footerItem i{
+  font-size: 2em;
+}

@@ -34,8 +34,7 @@
 		    </div>
 		</nav>
     	<div class="container">
-    	<cfset productObject = createObject('component', 'components.getProductDetails')>
-    	<cfset productDetails = productObject.getProductByID(#url.productID#)>
+    	<cfset productDetails = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
 		<cfoutput>
 			<div id="content">
 			<h1 id="pName">#productDetails.FLD_PRODUCTNAME#</h1>
@@ -59,8 +58,7 @@
 		    </div>
 		</nav>
 		<div class="container">
-			<cfset local.productObject = createObject('component', 'components.getProductDetails')>
-			<cfset local.productList = productObject.getAllProduct()>
+			<cfset local.productList = createObject('component', 'components.getProductDetails').getAllProduct()>
 			<cfloop from="1" to ="#local.productList.RecordCount#" index= "i" step = 3>
 				<cfoutput>
 					<div class="row row-cols-1 row-cols-md-3 g-4 product-row">

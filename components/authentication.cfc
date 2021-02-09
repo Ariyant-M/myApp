@@ -9,7 +9,8 @@
 	hint="Check user data form the users database and validate the given input">
 
 	<!--- validate user in credentials from database, if user is valid then log in them--->
-	<cffunction name="doLogin" access="remote" returnType="boolean" returnformat="plain">
+	<cffunction name="doLogin" access="remote" returnType="boolean" returnformat="plain"
+		hint="validate user in credentials from database, if user is valid then log in them">
 		<cfargument name="fld_useremail" required="true" type="string">
 		<cfargument name="fld_userpassword" required="true" type="string">
 		<cfset var hashPwd = hash(arguments.fld_userpassword)>
@@ -23,7 +24,7 @@
 			</cfquery>
 			<cfif userdata.recordCount EQ 1>
 				<cflock timeout= "2" scope="Session">
-					<cfset session.LoggedUser = {firstName = "#userdata.FLD_USERFIRSTNAME#", lastName = "#userdata.FLD_USERLASTNAME#", userID = "#userdata.FLD_USERID#" }>
+					<cfset session.LoggedUser = {userEmail = "#userdata.FLD_USEREMAIL#", firstName = "#userdata.FLD_USERFIRSTNAME#", lastName = "#userdata.FLD_USERLASTNAME#", userID = "#userdata.FLD_USERID#" }>
 				</cflock>
 				<cfreturn true>
 			<cfelse>
@@ -32,14 +33,17 @@
 		<cfcatch>
 				<cfset var logErrorMessage = "Error while logging in user.">
 				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
+				<cfabort showerror="error while logging in user">
 			</cfcatch>
 		</cftry>
 	</cffunction>
 
 	<!--- logout the user --->
-	<cffunction name="doLogout" access="remote" returnType="boolean" returnformat="plain">
+	<cffunction name="doLogout" access="remote" returnType="boolean" returnformat="plain"
+		hint="logout the user">
 		<cftry>
 			<cfset structdelete(session,'LoggedUser') />
+			<cfset sessionRotate()/>
 			<cfif structKeyExists(session, 'LoggedUser')>
 				<cfreturn false>
 			<cfelse>
@@ -53,7 +57,8 @@
 	</cffunction>
 
 	<!--- addnew new user --->
-	<cffunction name="addUser" access="remote" returntype="boolean" returnformat="plain">
+	<cffunction name="addUser" access="remote" returntype="boolean" returnformat="plain" 
+		hint="addnew new user">
 		<cfargument name="firstName" required="true" type="string">
 		<cfargument name="lastName" required="true" type="string">
 		<cfargument name="userEmail" required="true" type="string">
@@ -81,9 +86,9 @@
 			</cfcatch>
 		</cftry>
 	</cffunction>
-
 	<!--- check if a given email ID exist or not. Used in user sign up --->
-	<cffunction name="checkEmailExist" access="remote" returntype="boolean" returnformat="plain">
+	<cffunction name="checkEmailExist" access="remote" returntype="boolean" returnformat="plain" 
+		hint="check if a given email ID exist or not. Used in user sign up">
 		<cfargument name="checkEmail" required="true" type="string">
 		<cfset var checkMail = "">
 		<cfset var checkEmailResult = "">

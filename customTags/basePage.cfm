@@ -15,9 +15,23 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 			<script src="JavaScript/jquery-3.5.1.js"></script>
 			<script src="https://kit.fontawesome.com/ee6f18f199.js" crossorigin="anonymous"></script>
+			<script src="JavaScript/contactUs.js"></script>
 		</head>
 		<body>
 <cfelse>
+	<footer>
+		<div class="container-fluid center">
+	        <button class="btn btn-primary" id="contactUS">Contact US  <i class="fas fa-pen"></i></button>
+	        <br>
+	        Follow us on:
+	        <br>
+	        <div id ="footerItem">
+	        	<a href="https://www.facebook.com/ariyant.meher"><i class="fab fa-facebook"></i></a>
+	        	<a href="https://www.linkedin.com/in/ariyant-meher/"><i class="fab fa-linkedin-in"></i></a>
+	        	<a href="https://www.instagram.com/_ariyant_/"><i class="fab fa-instagram"></i></a>
+	        </div>
+	    </div>
+    </footer>
 		</body>
 	</html>
 </cfif>
