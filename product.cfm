@@ -1,5 +1,13 @@
+
 <!---get product list--->
 <cfmodule template="customTags/basePage.cfm" title = "Product">
+	<cfscript>
+		products = cacheGet('cacheProducts');
+		if(isNull(products)){
+			productComponent = createObject('component', 'components.getProductDetails').getAllProduct();
+			cachePut('cacheProducts', productComponent);
+		}
+	</cfscript>
   	<cfif isDefined("session.LoggedUser")>
 	<cfif isDefined("url.productID")>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,48 +65,51 @@
 		      </div>
 		    </div>
 		</nav>
-		<div class="container">
-			<cfset local.productList = createObject('component', 'components.getProductDetails').getAllProduct()>
-			<cfloop from="1" to ="#local.productList.RecordCount#" index= "i" step = 3>
-				<cfoutput>
-					<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
-					  <div class="col">
-					    <div class="card h-100">
-					      <div class="card-body">
-					      	<cfset local.data = QueryGetRow(productList, #i#) >
-					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-					      </div>
-					    </div>
-					  </div>
-					  <cfif #i# LT local.productList.RecordCount>
-					  <div class="col">
-					    <div class="card h-100">
-					      <div class="card-body">
-					      	<cfset i++>
-					      	<cfset local.data = QueryGetRow(productList, #i#) >
-					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-					      </div>
-					    </div>
-					  </div>
-					  </cfif>
-					  <cfif #i# LT local.productList.RecordCount>
-					  <div class="col">
-					    <div class="card h-100">
-					      <div class="card-body">
-					      	<cfset i++>
-					      	<cfset local.data = QueryGetRow(productList, #i#) >
-					        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-					        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-					      </div>
-					    </div>
-					  </div>
-					  </cfif>
-					</div>
-				</cfoutput>
-			</cfloop>
-	    </div>
+		<cfif not isNull(products)>
+			<div class="container">
+				<cfloop from="1" to ="#products.RecordCount#" index= "i" step = 3>
+					<cfoutput>
+						<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
+						  <div class="col">
+						    <div class="card h-100">
+						      <div class="card-body">
+						      	<cfset local.data = QueryGetRow(products, #i#) >
+						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+						      </div>
+						    </div>
+						  </div>
+						  <cfif #i# LT products.RecordCount>
+						  <div class="col">
+						    <div class="card h-100">
+						      <div class="card-body">
+						      	<cfset i++>
+						      	<cfset local.data = QueryGetRow(products, #i#) >
+						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+						      </div>
+						    </div>
+						  </div>
+						  </cfif>
+						  <cfif #i# LT products.RecordCount>
+						  <div class="col">
+						    <div class="card h-100">
+						      <div class="card-body">
+						      	<cfset i++>
+						      	<cfset local.data = QueryGetRow(products, #i#) >
+						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+						      </div>
+						    </div>
+						  </div>
+						  </cfif>
+						</div>
+					</cfoutput>
+				</cfloop>
+	   		 </div>
+	   		<cfelse>
+	   			<cflocation url="product.cfm">
+		</cfif>
 	</cfif>
 	<cfelse>
 		<cflocation url="index.cfm">

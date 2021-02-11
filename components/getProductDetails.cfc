@@ -19,12 +19,15 @@
 	</cffunction>
 
 	<!--- return all product present in the database --->
-	<cffunction name="getAllProduct" returntype="query">
+	<cffunction name="getAllProduct" returntype="query" access="remote">
 		<cftry>
 			<cfquery name="local.product" datasource="myAppDB">
 				SELECT FLD_PRODUCTID, FLD_PRODUCTNAME, FLD_PRODUCTDETAILS
 				FROM TBL_PRODUCTLIST
 			</cfquery>
+			<cfscript>
+				cachePut('cacheProducts', local.product, createTimespan(0, 1, 0, 0),createTimespan(0, 0, 30, 0));
+			</cfscript>
 			<cfreturn local.product>
 		<cfcatch type="database">
 				<cfset var logErrorMessage = "Error while get all product.">

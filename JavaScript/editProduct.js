@@ -18,8 +18,16 @@ $(document).ready(function () {
             success: function (data) {
               if(data == "true")
               {
-                alert("updation successful");
-                window.location = "product.cfm";
+                $.ajax({
+                  type: "POST",
+                  url: "components/getProductDetails.cfc",
+                  data: { method: "getAllProduct", 
+                        },
+                  success: function(data){
+                    alert("updation successful");
+                    window.location = "product.cfm";
+                  }
+                });
               } else if (data == "false"){
                 alert("failed");
               } else{

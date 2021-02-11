@@ -14,8 +14,16 @@ $(document).ready(function () {
       data: { method: "deleteProduct", productID: productID },
       success: function (data) {
         if(data == "true"){
-          alert("data deleted..");
-          window.location = "product.cfm";
+          $.ajax({
+              type: "POST",
+              url: "components/getProductDetails.cfc",
+              data: { method: "getAllProduct", 
+                    },
+              success: function(data){
+                alert("data deleted..");
+                window.location = "product.cfm";
+              },
+            });
         } else if (data == "false"){
           alert("failed to delete");
         } else{
@@ -42,8 +50,17 @@ $(document).ready(function () {
               },
         success: function (newData) {
           if(newData == "true"){
-            alert("data added");
-            window.location = "product.cfm";
+            $.ajax({
+              type: "POST",
+              url: "components/getProductDetails.cfc",
+              data: { method: "getAllProduct", 
+                    },
+              success: function(data){
+                alert("data added");
+                window.location = "product.cfm";
+              }
+            });
+            
           } else if (newData == "false") {
             alert("failed to add new data..");
           } else {
