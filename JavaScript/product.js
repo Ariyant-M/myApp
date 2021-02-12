@@ -10,20 +10,12 @@ $(document).ready(function () {
     var productID = urlParams.get("productID");
     $.ajax({
       type: "POST",
-      url: "components/updateProductDetails.cfc",
+      url: "components/productsComponent.cfc",
       data: { method: "deleteProduct", productID: productID },
       success: function (data) {
         if(data == "true"){
-          $.ajax({
-              type: "POST",
-              url: "components/getProductDetails.cfc",
-              data: { method: "getAllProduct", 
-                    },
-              success: function(data){
-                alert("data deleted..");
-                window.location = "product.cfm";
-              },
-            });
+          alert("data deleted..");
+          window.location = "product.cfm";
         } else if (data == "false"){
           alert("failed to delete");
         } else{
@@ -43,24 +35,15 @@ $(document).ready(function () {
     if(newProductNamejs != '' && newProductDetailsjs != ''){
       $.ajax({
         type: "POST",
-        url: "components/updateProductDetails.cfc",
+        url: "components/productsComponent.cfc",
         data: { method: "addNewProduct", 
                 newProductName: newProductNamejs,
                 newProductDetails: newProductDetailsjs,
               },
         success: function (newData) {
           if(newData == "true"){
-            $.ajax({
-              type: "POST",
-              url: "components/getProductDetails.cfc",
-              data: { method: "getAllProduct", 
-                    },
-              success: function(data){
-                alert("data added");
-                window.location = "product.cfm";
-              }
-            });
-            
+            alert("data added");
+            window.location = "product.cfm";
           } else if (newData == "false") {
             alert("failed to add new data..");
           } else {

@@ -2,9 +2,9 @@
 	<cfparam name="attributes.exprotType" default="">
 		<cfif structKeyExists(session, "LoggedUser")>
 			<cfif "#url.productID#" NEQ "null">
-				<cfset local.productData = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
+				<cfset local.productData = createObject('component', 'components.productsComponent').getProductByID(#url.productID#)>
 			<cfelse>
-				<cfset local.productData = createObject('component', 'components.getProductDetails').getAllProduct()>
+				<cfset local.productData = createObject('component', 'components.productsComponent').getAllProduct()>
 			</cfif>
 
 

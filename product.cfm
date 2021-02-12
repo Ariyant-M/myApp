@@ -4,7 +4,7 @@
 	<cfscript>
 		products = cacheGet('cacheProducts');
 		if(isNull(products)){
-			productComponent = createObject('component', 'components.getProductDetails').getAllProduct();
+			productComponent = createObject('component', 'components.productsComponent').getAllProduct();
 			cachePut('cacheProducts', productComponent);
 		}
 	</cfscript>
@@ -42,7 +42,7 @@
 		    </div>
 		</nav>
     	<div class="container">
-    	<cfset productDetails = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
+    	<cfset productDetails = createObject('component', 'components.productsComponent').getProductByID(#url.productID#)>
 		<cfoutput>
 			<div id="content">
 			<h1 id="pName">#productDetails.FLD_PRODUCTNAME#</h1>

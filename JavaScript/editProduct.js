@@ -8,7 +8,7 @@ $(document).ready(function () {
     if(productNamejs != '' && productDetailsjs != ''){
       $.ajax({
             type: "POST",
-            url: "components/updateProductDetails.cfc",
+            url: "components/productsComponent.cfc",
             data: {
               method: "editProduct",
               productID: productIDjs,
@@ -18,16 +18,8 @@ $(document).ready(function () {
             success: function (data) {
               if(data == "true")
               {
-                $.ajax({
-                  type: "POST",
-                  url: "components/getProductDetails.cfc",
-                  data: { method: "getAllProduct", 
-                        },
-                  success: function(data){
-                    alert("updation successful");
-                    window.location = "product.cfm";
-                  }
-                });
+                alert("updation successful");
+                window.location = "product.cfm";
               } else if (data == "false"){
                 alert("failed");
               } else{

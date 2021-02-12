@@ -7,7 +7,7 @@
 			</nav>
 			<div class="container">
 				<cfif isDefined("url.productID")>
-				<cfset productObject = createObject('component','components.getProductDetails')>
+				<cfset productObject = createObject('component','components.productsComponent')>
 				<cfset productList = productObject.getProductByID(#url.productID#)>
 				<form method="post">
 					<div class="mb-3">

@@ -5,7 +5,7 @@
 				<cfcontent type="application/pdf">
 				<cfdocument format="PDF">
 					<cfoutput>
-						<cfset local.productData = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
+						<cfset local.productData = createObject('component', 'components.productsComponent').getProductByID(#url.productID#)>
 						<small id="pID">Product ID: #local.productData.FLD_PRODUCTID#</small>
 						<h1 id="pName">Product Name: #local.productData.FLD_PRODUCTNAME#</h1>
 						<h3 id="pDetails">Product Details: #local.productData.FLD_PRODUCTDETAILS#</h3>
@@ -15,7 +15,7 @@
 				<cfheader name="Content-Disposition" value="attachment; filename=allProducts.pdf">
 				<cfcontent type="application/pdf">
 				<cfdocument format="PDF">
-					<cfset local.allProductData = createObject('component', 'components.getProductDetails').getAllProduct()>
+					<cfset local.allProductData = createObject('component', 'components.productsComponent').getAllProduct()>
 					<table>
 						<tr>
 							<th>ProductID</th>
