@@ -1,116 +1,116 @@
 
 <!---get product list--->
 <cfmodule template="customTags/basePage.cfm" title = "Product">
-	<cfscript>
-		products = cacheGet('cacheProducts');
-		if(isNull(products)){
-			productComponent = createObject('component', 'components.productsComponent').getAllProduct();
-			cachePut('cacheProducts', productComponent);
-		}
-	</cfscript>
   	<cfif isDefined("session.LoggedUser")>
-	<cfif isDefined("url.productID")>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="product.cfm">myApp</a>
-		      <div class="d-flex">
-		        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
-		        <!-- Button trigger modal -->
-				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
-				  Delete <i class="fas fa-trash-alt"></i>
-				</button>
+		<cfif isDefined("url.productID")>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <div class="container-fluid">
+			    <a class="navbar-brand" href="product.cfm">myApp</a>
+			      <div class="d-flex">
+			        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
+			        <!-- Button trigger modal -->
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
+					  Delete <i class="fas fa-trash-alt"></i>
+					</button>
 
-				<!-- Modal -->
-				<div class="modal fade" id="confirmDel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				        Are you sure, data will be deleted permanently..
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-				        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
-				      </div>
-				    </div>
-				  </div>
+					<!-- Modal -->
+					<div class="modal fade" id="confirmDel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        Are you sure, data will be deleted permanently..
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
+					        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+			      </div>
+			    </div>
+			</nav>
+	    	<div class="container">
+	    		<cfif cacheIdExists('PRODUCTSTRUCT')>
+		    		<cfscript>
+		    			cachedProductByID= cacheGet('PRODUCTSTRUCT');
+		    			productDetails = cachedProductByID.find('#url.productID#');
+		    		</cfscript>
+		    	<cfelse>
+		    		<cfset productDetails = createObject('component','components.productsComponent').getProductByID('#url.productID#')>
+		    		<cfset local.productByID = createObject('component','components.productsComponent').queryToStructProdcut()>
+		    		<cfscript>
+		    			cachedProductByID= cacheGet('PRODUCTSTRUCT');
+		    			productDetails = cachedProductByID.find('#url.productID#');
+		    		</cfscript>
+		    	</cfif>
+			<cfoutput>
+				<div id="content">
+				<h1 id="pName">#productDetails.FLD_PRODUCTNAME#</h1>
+				<br>
+				<h3 id="pDetails">#productDetails.FLD_PRODUCTDETAILS#</h3>
 				</div>
-		      </div>
-		    </div>
-		</nav>
-    	<div class="container">
-    	<cfset productDetails = createObject('component', 'components.productsComponent').getProductByID(#url.productID#)>
-		<cfoutput>
-			<div id="content">
-			<h1 id="pName">#productDetails.FLD_PRODUCTNAME#</h1>
-			<br>
-			<h3 id="pDetails">#productDetails.FLD_PRODUCTDETAILS#</h3>
+			</cfoutput>
+			<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
+			<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
 			</div>
-		</cfoutput>
-		<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
-		<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
-		</div>
-	<cfelse>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="product.cfm">myApp</a>
-		      <div class="d-flex">
-				<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
-				<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
-		      	<button class="btn btn-primary" id="addNew" onclick="location.href = 'newProduct.cfm';">New Product <i class="fas fa-plus"></i></button>
-		        <button class="btn btn-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
-		      </div>
-		    </div>
-		</nav>
-		<cfif not isNull(products)>
+		<cfelse>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <div class="container-fluid">
+			    <a class="navbar-brand" href="product.cfm">myApp</a>
+			      <div class="d-flex">
+					<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
+					<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
+			      	<button class="btn btn-primary" id="addNew" onclick="location.href = 'newProduct.cfm';">New Product <i class="fas fa-plus"></i></button>
+			        <button class="btn btn-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
+			      </div>
+			    </div>
+			</nav>
 			<div class="container">
-				<cfloop from="1" to ="#products.RecordCount#" index= "i" step = 3>
-					<cfoutput>
+				<cfif cacheIdExists('PRODUCTSTRUCT')>
+		    		<cfscript>
+		    			products= cacheGet('PRODUCTSTRUCT');
+		    		</cfscript>
+		    		<cfoutput>
 						<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
-						  <div class="col">
-						    <div class="card h-100">
-						      <div class="card-body">
-						      	<cfset local.data = QueryGetRow(products, #i#) >
-						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-						      </div>
-						    </div>
-						  </div>
-						  <cfif #i# LT products.RecordCount>
-						  <div class="col">
-						    <div class="card h-100">
-						      <div class="card-body">
-						      	<cfset i++>
-						      	<cfset local.data = QueryGetRow(products, #i#) >
-						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-						      </div>
-						    </div>
-						  </div>
-						  </cfif>
-						  <cfif #i# LT products.RecordCount>
-						  <div class="col">
-						    <div class="card h-100">
-						      <div class="card-body">
-						      	<cfset i++>
-						      	<cfset local.data = QueryGetRow(products, #i#) >
-						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
-						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
-						      </div>
-						    </div>
-						  </div>
-						  </cfif>
+							<cfloop collection="#products#" item= "key">
+							  <div class="col">
+							    <div class="card h-100">
+							      <div class="card-body">
+							      	<cfset local.data =  #products[key]# >
+							        <h5 class="card-title"><a href="product.cfm?productID=#key#">#data.FLD_PRODUCTNAME#</a></h5>
+							        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+							      </div>
+							    </div>
+							  </div>
+							</cfloop>
 						</div>
 					</cfoutput>
-				</cfloop>
+		    	<cfelse>
+		    		<cfset local.productList = createObject('component', 'components.productsComponent').getAllProduct()>
+		    		<cfset local.productByID = createObject('component','components.productsComponent').queryToStructProdcut()>
+		    		<cfoutput>
+					<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
+						<cfloop from="1" to ="#local.productList.RecordCount#" index= "i">
+						  <div class="col">
+						    <div class="card h-100">
+						      <div class="card-body">
+						      	<cfset local.data =  QueryGetRow(productList, #i#) >
+						        <h5 class="card-title"><a href="product.cfm?productID=#data.FLD_PRODUCTID#">#data.FLD_PRODUCTNAME#</a></h5>
+						        <p class="card-text">#left("#local.data.FLD_PRODUCTDETAILS#",100)#...</p>
+						      </div>
+						    </div>
+						  </div>
+						</cfloop>
+					</div>
+				</cfoutput>
+		    	</cfif>
 	   		 </div>
-	   		<cfelse>
-	   			<cflocation url="product.cfm">
 		</cfif>
-	</cfif>
 	<cfelse>
 		<cflocation url="index.cfm">
 	</cfif>

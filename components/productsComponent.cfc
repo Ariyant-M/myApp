@@ -25,9 +25,6 @@
 				SELECT FLD_PRODUCTID, FLD_PRODUCTNAME, FLD_PRODUCTDETAILS
 				FROM TBL_PRODUCTLIST
 			</cfquery>
-			<cfscript>
-				cachePut('cacheProducts', local.product, createTimespan(0, 1, 0, 0),createTimespan(0, 0, 30, 0));
-			</cfscript>
 			<cfreturn local.product>
 		<cfcatch type="database">
 				<cfset var logErrorMessage = "Error while get all product.">
@@ -37,18 +34,15 @@
 	</cffunction>
 
 	<!--- convert the allProduct query to struct and store in cache --->
-	<cffunction name="queryToStruct" returntype="struct">
+	<cffunction name="queryToStructProdcut" output="false" access="remote">
 		<cfscript>
-			allPro = cacheGet('cacheProducts');
-			if(isNull(allPro)){
-				allPro = getAllProduct();
+			var productQuery = getAllProduct();
+			var productStruct = structNew();
+			for(i in productQuery){
+				productStruct['#i.FLD_PRODUCTID#'] = {FLD_PRODUCTNAME = '#i.FLD_PRODUCTNAME#', FLD_PRODUCTDETAILS = '#i.FLD_PRODUCTDETAILS#'};
 			}
-			allProStruct = structNew();
-			for(i in allPro){
-				allProStruct[#i.FLD_PRODUCTID#]={FLD_PRODUCTNAME = '#i.FLD_PRODUCTNAME#', FLD_PRODUCTDETAILS = '#i.FLD_PRODUCTDETAILS#'};
-			}
+			cachePut('productStruct', productStruct, createTimespan(0, 1, 0, 0), createTimespan(0, 0, 30, 0));
 		</cfscript>
-		<cfreturn allProStruct>
 	</cffunction>
 
 	<!--- edit the product data --->
@@ -67,7 +61,7 @@
 			<cfif productEditResult.sql EQ ''>
 				<cfreturn false>
 			<cfelse>
-				<cfset var cacheUpdate = getAllProduct()>
+				<cfset var cacheUpdate = queryToStructProdcut()>
 				<cfreturn true>
 			</cfif>
 		<cfcatch>
@@ -93,7 +87,7 @@
 			<cfif newProductResult.sql EQ ''>
 				<cfreturn "false">
 			<cfelse>
-				<cfset var cacheUpdate = getAllProduct()>
+				<cfset var cacheUpdate = queryToStructProdcut()>
 				<cfreturn "true">
 			</cfif>
 		<cfcatch>
@@ -112,7 +106,7 @@
 				DELETE FROM TBL_PRODUCTLIST
 				WHERE FLD_PRODUCTID = <cfqueryparam value= "#arguments.productID#" cfsqltype="CF_SQL_INTEGER" />
 			</cfquery>
-			<cfset var cacheUpdate = getAllProduct()>
+			<cfset var cacheUpdate = queryToStructProdcut()>
 			<cfreturn true>
 		<cfcatch>
 				<cfset var logErrorMessage = "Error while Deleting product.">
