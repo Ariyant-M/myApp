@@ -6,6 +6,7 @@
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
+		      	<cfif #session.loggeduser.role# EQ 'admin'>
 		        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
 		        <!-- Button trigger modal -->
 				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
@@ -32,6 +33,7 @@
 				</div>
 		      </div>
 		    </div>
+		</cfif>
 		</nav>
     	<div class="container">
     	<cfset productDetails = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
@@ -52,7 +54,9 @@
 		      <div class="d-flex">
 				<button type="button" class="btn btn-primary" id="ExportPDF">Export as PDF <i class="fas fa-file-pdf"></i></button>
 				<button type="button" class="btn btn-primary" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></button>
+				<cfif #session.loggeduser.role# EQ 'admin'>
 		      	<button class="btn btn-primary" id="addNew" onclick="location.href = 'newProduct.cfm';">New Product <i class="fas fa-plus"></i></button>
+		      	</cfif>
 		        <button class="btn btn-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
 		      </div>
 		    </div>

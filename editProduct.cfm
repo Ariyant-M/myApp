@@ -1,3 +1,4 @@
+<cfif #session.loggeduser.role# EQ 'admin'>
 <cfmodule template="customTags/basePage.cfm" title = "Edit Product">
 		<cfif structKeyExists(session, "LoggedUser")>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,3 +33,6 @@
 		</div>
 		<script src="JavaScript/editProduct.js"></script>
 </cfmodule> 
+<cfelse>
+	<cflocation url="product.cfm">
+</cfif>

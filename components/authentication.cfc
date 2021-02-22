@@ -17,14 +17,14 @@
 		<cfset var userdata = "">
 		<cftry>
 			<cfquery name="userdata">
-				SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL
+				SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL,FLD_USERROLE
 				FROM TBL_USERS
 				WHERE FLD_USEREMAIL = <cfqueryparam value= "#arguments.fld_useremail#" cfsqltype="cf_sql_varchar" />
 				AND BINARY FLD_USERPASSWORD = <cfqueryparam value= "#hashPwd#" cfsqltype="cf_sql_varchar" />
 			</cfquery>
 			<cfif userdata.recordCount EQ 1>
 				<cflock timeout= "2" scope="Session">
-					<cfset session.LoggedUser = {userEmail = "#userdata.FLD_USEREMAIL#", firstName = "#userdata.FLD_USERFIRSTNAME#", lastName = "#userdata.FLD_USERLASTNAME#", userID = "#userdata.FLD_USERID#" }>
+					<cfset session.LoggedUser = {userEmail = "#userdata.FLD_USEREMAIL#", firstName = "#userdata.FLD_USERFIRSTNAME#", lastName = "#userdata.FLD_USERLASTNAME#", userID = "#userdata.FLD_USERID#", role = "#userdata.FLD_USERROLE#" }>
 				</cflock>
 				<cfreturn true>
 			<cfelse>
