@@ -1,4 +1,5 @@
-<cfif #session.loggeduser.role# EQ 'admin'>
+<cfmodule template="customTags/loginValidation.cfm" />
+<cfif isDefined("session.loggeduser")>
 <cfmodule template="customTags/basePage.cfm" title = "Add Product">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
@@ -21,5 +22,5 @@
 	<script src="JavaScript/product.js"></script>
 </cfmodule>
 <cfelse>
-	<cflocation url="product.cfm">
+	<cflocation url="index.cfm">
 </cfif>

@@ -91,5 +91,11 @@ $(document).ready(function () {
     var productID = urlParams.get("productID");
     window.open("exportAsExcel.cfm?productID=" + productID,'_blank');
   });
+  $("#addNew").click(function() {
+    window.location = "newProduct.cfm";
+  });
+  $("#adminPanel").click(function() {
+    window.location = "adminPanel.cfm";
+  });
   $("#confirm").attr("data-bs-dismiss", "modal");
 });

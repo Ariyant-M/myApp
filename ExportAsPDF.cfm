@@ -1,3 +1,4 @@
+<cfmodule template="customTags/loginValidation.cfm" />
 <cfmodule template="customTags/basePage.cfm">
 		<cfif structKeyExists(session, "LoggedUser")>
 			<cfif "#url.productID#" NEQ "null">

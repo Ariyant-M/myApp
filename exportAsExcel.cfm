@@ -1,3 +1,4 @@
+<cfmodule template="customTags/loginValidation.cfm" />
 <cfmodule template="customTags/basePage.cfm">
 	<cfparam name="attributes.exprotType" default="">
 		<cfif structKeyExists(session, "LoggedUser")>

@@ -1,3 +1,4 @@
+<cfmodule template="customTags/loginValidation.cfm" />
 <cfif #session.loggeduser.role# EQ 'admin'>
 <cfmodule template="customTags/basePage.cfm" title = "Edit Product">
 		<cfif structKeyExists(session, "LoggedUser")>

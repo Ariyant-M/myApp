@@ -26,9 +26,9 @@
 	        Follow us on:
 	        <br>
 	        <div id ="footerItem">
-	        	<a href="https://www.facebook.com/ariyant.meher"><i class="fab fa-facebook"></i></a>
-	        	<a href="https://www.linkedin.com/in/ariyant-meher/"><i class="fab fa-linkedin-in"></i></a>
-	        	<a href="https://www.instagram.com/_ariyant_/"><i class="fab fa-instagram"></i></a>
+	        	<a href="https://www.facebook.com/ariyant.meher" target="_blank"><i class="fab fa-facebook"></i></a>
+	        	<a href="https://www.linkedin.com/in/ariyant-meher/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+	        	<a href="https://www.instagram.com/_ariyant_/" target="_blank"><i class="fab fa-instagram"></i></a>
 	        </div>
 	    </div>
     </footer>

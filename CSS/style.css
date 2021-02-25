@@ -47,3 +47,6 @@ footer{
 #footerItem i{
   font-size: 2em;
 }
+#ExportPDF{
+  cursor: pointer;
+}
