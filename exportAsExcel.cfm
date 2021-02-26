@@ -10,7 +10,7 @@
 
 
 				<cfset sheetObj = spreadsheetNew()>
-				<cfset spreadsheetAddRow(sheetObj, "ProductId, ProductName, ProductDetails")>
+				<cfset spreadsheetAddRow(sheetObj, "ProductId, ProductName, ProductDetails, Created by, Creaeted on")>
 				<cfset spreadsheetFormatRow(sheetObj,
 					{
 						bold=true,

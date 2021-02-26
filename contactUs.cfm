@@ -30,7 +30,7 @@
 				  <label for="emailBody" class="form-label">Message</label>
 				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
 				</div>
-				<button class="btn btn-primary" id="sendMail">Send <i class="fas fa-paper-plane"></i></button>
+				<button class="btn btn-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
 			</div>
 			<div class="col"></div>
 		</div>
@@ -56,7 +56,7 @@
 				  <label for="emailBody" class="form-label">Message</label>
 				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
 				</div>
-				<button class="btn btn-primary" id="sendMail">Send <i class="fas fa-paper-plane"></i></button>
+				<button class="btn btn-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
 			</div>
 			<div class="col"></div>
 		</div>

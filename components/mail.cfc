@@ -1,8 +1,8 @@
 <cfcomponent displayname="mailForApp" output="false" extends="logError"
 	hint="send mail">
 	<cffunction name="sendMail" access="remote" hint="" returntype="boolean" returnformat="plain">
-		<cfargument name="mailFrom" default="admin@myApp.com">
-		<cfargument name="mailTo" default="dummy@myApp.com">
+		<cfargument name="mailFrom" default="ariyant.meher001@gmail.com">
+		<cfargument name="mailTo" default="ariyant.meher001@gmail.com">
 		<cfargument name="mailSubject" default = "sign Up successful">
 		<cfargument name="mailBody" 
 			default="<h1>Welcome to myApp</h1><br><h3>Explore the products..</h3>">

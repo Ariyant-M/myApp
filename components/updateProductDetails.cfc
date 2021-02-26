@@ -60,9 +60,9 @@
 				<cfreturn "true">
 			</cfif>
 		<cfcatch>
-				<cfset var logErrorMessage = "Error while adding new product.">
-				<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
-			</cfcatch>
+			<cfset var logErrorMessage = "Error while adding new product.">
+			<cfset var log = Super.FileLogError("#logErrorMessage#", "#cfcatch.type#", "#cfcatch.detail#")>
+		</cfcatch>
 		</cftry>
 	</cffunction>
 
