@@ -98,4 +98,33 @@ $(document).ready(function () {
     window.location = "adminPanel.cfm";
   });
   $("#confirm").attr("data-bs-dismiss", "modal");
+  $("#applyFilter").click(function() {
+    var startDate = $("#start-date").val();
+    var endDate = $("#end-date").val();
+    var keyword = $("#filterKeywords").val();
+    var url = "product.cfm?startdate="+startDate+"&enddate="+endDate+"&keyword="+keyword;
+    window.location = url;
+  });
 });
+function showDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1;
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd = '0'+dd;
+  } 
+
+  if(mm<10) {
+      mm = '0'+mm;
+  } 
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $("#end-date").attr("value", today);
+}
+
+
+window.onload = function() {
+  showDate();
+};

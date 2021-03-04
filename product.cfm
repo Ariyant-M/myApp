@@ -63,6 +63,9 @@
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
+		      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productFilter">
+				  Filter <i class="fas fa-filter"></i>
+				</button>
 		      	<cfif #session.loggeduser.role# EQ "admin">
 		      		<button type="button" class="btn btn-primary" id="adminPanel">
 						Admin Panel <i class="fas fa-user-cog"></i>
@@ -82,8 +85,48 @@
 		      </div>
 		    </div>
 		</nav>
+		<!-- Modal for filter product -->
+		<div class="modal fade" id="productFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+		        	<h6>Date</h6>
+		        	<label for="start-date">Start Date</label>
+		        	<br>
+		        	<input type="date" name="start-date" class="form-control" id="start-date" value="2020-08-15">
+		        	<label for="end-date">End Date</label>
+		        	<br>
+		        	<input type="date" name="end-date" class="form-control" id="end-date">
+		        	<br>
+		        	<h6>Keywords</h6>
+		        	<input type="text" name="filterKeywords" class="form-control" id="filterKeywords">
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="applyFilter">Apply</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<div class="container">
 			<cfset local.productList = createObject("component", "components.getProductDetails").getAllProduct()>
+			<cfif isDefined("url.startdate")>
+				<cfset local.filterStartDate = #url.startdate#>
+				<cfset local.filterEndDate = #url.enddate#>
+				<cfset local.filterKeyword = #url.keyword#>
+				<cfset local.productList = createObject("component", "components.getProductDetails").getFilteredProductList(#local.filterStartDate#,#local.filterEndDate#,#local.filterKeyword#)>
+			</cfif>
+			<cfif local.productList.RecordCount EQ 0>
+				<div class="alert alert-danger" role="alert">
+				  No product Found :(
+				</div>
+			</cfif>
 			<div class="row row-cols-1 row-cols-md-3 g-4 product-row">
 				<cfloop from="1" to ="#local.productList.RecordCount#" index= "i">
 					<cfoutput>
