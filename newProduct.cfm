@@ -16,7 +16,7 @@
 			<label for="newProductDetails" class="form-label">Details</label>
 			<textarea class="form-control" id="newProductDetails" name="newProductDetails" rows="3" required="true"></textarea>
 			</div>
-			<button class="btn btn-primary" id="addNewProduct" name="addNewProduct">Submit</button>
+			<button class="btn btn-outline-primary" id="addNewProduct" name="addNewProduct">Submit <i class="fas fa-arrow-right"></i></button>
 		</cfform>
 	</div>
 	<script src="JavaScript/product.js"></script>

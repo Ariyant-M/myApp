@@ -7,7 +7,7 @@
 			  <div class="container-fluid">
 			    <a class="navbar-brand">myApp</a>
 		         <div class="d-flex">
-		           <button class="btn btn-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
+		           <button class="btn btn-outline-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
 		         </div>
 			  </div>
 			</nav>
@@ -49,7 +49,7 @@
 		                />
 						<small>much be more then 5 letter</small>
 		              </div>
-		              <button class="btn btn-primary" value="submit" name="fld_submitLogin" id="fld_submitLogin" >Submit <i class="fas fa-sign-in-alt"></i></button>
+		              <button class="btn btn-outline-primary" value="submit" name="fld_submitLogin" id="fld_submitLogin" >Submit <i class="fas fa-sign-in-alt"></i></button>
 		            </fieldset>
 		          </form>
 		        </div>

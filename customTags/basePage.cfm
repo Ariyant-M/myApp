@@ -21,7 +21,7 @@
 <cfelse>
 	<footer>
 		<div class="container-fluid center">
-	        <button class="btn btn-primary" id="contactUS">Contact US  <i class="fas fa-pen"></i></button>
+	        <button class="btn btn-outline-primary" id="contactUS">Contact US  <i class="fas fa-pen"></i></button>
 	        <br>
 	        Follow us on:
 	        <br>

@@ -7,7 +7,7 @@
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
 		      	<div class="dropdown">
-				  <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				  <button class="btn btn-outline-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				    Export <i class="fas fa-file-export"></i>
 				  </button>
 				  <ul class="dropdown-menu dropdown-menu-primary" aria-labelledby="dropdownMenuButton2">
@@ -16,13 +16,14 @@
 				  </ul>
 				</div>
 		      	<cfif session.loggeduser.role EQ 'admin'>
-		        <button class="btn btn-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
+		        <button class="btn btn-outline-primary" id="editProduct" style = "margin-right: 10px;">Edit <i class="fas fa-edit"></i></button>
 		        <!-- Button trigger modal -->
-				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
+				<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDel">
 				  Delete <i class="fas fa-trash-alt"></i>
 				</button>
 				</cfif>
-				<!-- Modal -->
+				<button class="btn btn-outline-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
+				<!-- Modal for Delete Confirmation -->
 				<div class="modal fade" id="confirmDel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
@@ -34,8 +35,8 @@
 				        Are you sure, data will be deleted permanently..
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-				        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+				        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancel</button>
+				        <button type="button" class="btn btn-outline-danger" id="confirmDelete">Delete</button>
 				      </div>
 				    </div>
 				  </div>
@@ -63,16 +64,16 @@
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
-		      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productFilter">
+		      	<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productFilter">
 				  Filter <i class="fas fa-filter"></i>
 				</button>
 		      	<cfif #session.loggeduser.role# EQ "admin">
-		      		<button type="button" class="btn btn-primary" id="adminPanel">
+		      		<button type="button" class="btn btn-outline-primary" id="adminPanel">
 						Admin Panel <i class="fas fa-user-cog"></i>
 					</button>
 		      	</cfif>
 				<div class="dropdown">
-				  <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				  <button class="btn btn-outline-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				    Export <i class="fas fa-file-export"></i>
 				  </button>
 				  <ul class="dropdown-menu dropdown-menu-primary" aria-labelledby="dropdownMenuButton2">
@@ -80,8 +81,8 @@
 				    <li><a class="dropdown-item export" id="ExportExcel">Export as Excel <i class="fas fa-file-excel"></i></a></li>
 				  </ul>
 				</div>
-		      	<button class="btn btn-primary" id="addNew">New Product <i class="fas fa-plus"></i></button>
-		        <button class="btn btn-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
+		      	<button class="btn btn-outline-primary" id="addNew">New Product <i class="fas fa-plus"></i></button>
+		        <button class="btn btn-outline-danger" id="logout">Log Out <i class="fas fa-sign-out-alt"></i></button>
 		      </div>
 		    </div>
 		</nav>
@@ -108,8 +109,8 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary" id="applyFilter">Apply</button>
+		        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-outline-primary" id="applyFilter">Apply <i class="fas fa-arrow-right"></i></button>
 		      </div>
 		    </div>
 		  </div>

@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title></title>
+	<title>PDF preview</title>
 
 </head>
 <body>
@@ -22,27 +22,29 @@
 					<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
 					<style type="text/css">
 						html,body{
-							height: 100%;
 							margin: 0;
 							padding: 0;
-							background-color: #d7d2e0;
+							background: lightblue;
+							color: black;
 						}
 						.main-frame{
-							height: 100%;
 							padding: 30px;
 						}
-						.center{
+						.center-text{
 							text-align: center;
 							font-family: 'Akaya Telivigala', cursive;
 						}
 						.left{
 							text-align: left;
 						}
+						.details{
+							background: pink;
+						}
 					</style>
 						<cfset local.productData = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
 						<div class="container-fluid">
 							<div class="main-frame">
-							<div class="center">
+							<div class="center-text">
 								<h1><u>
 									<cfoutput>
 										#local.productData.FLD_PRODUCTNAME#
@@ -57,7 +59,7 @@
 								</cfoutput>
 							</div>
 							<br>
-							<div class="center">
+							<div class="center-text details">
 								<h4>
 									<cfoutput>
 										#local.productData.FLD_PRODUCTDETAILS#
@@ -76,11 +78,15 @@
 						</div>
 				</cfdocument>
 			<cfelse>
-				<cfheader name="Content-Disposition" value="attachment; filename=allProducts.pdf">
-				<cfcontent type="application/pdf">
 				<cfdocument format="PDF">
+					<link rel="stylesheet" type="text/css" href="CSS/exportPDF.css">
+					<style type="text/css">
+						table{
+							border-collapse: collapse;
+						}
+					</style>
 					<cfset local.allProductData = createObject('component', 'components.getProductDetails').getAllProduct()>
-					<table>
+					<table id="pdfTable">
 						<tr>
 							<th>ProductID</th>
 							<th>ProductName</th>

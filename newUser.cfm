@@ -37,7 +37,7 @@
 				<div id="conPassError" class="hiddenError colorRed"></div>
 				</div>
 				<br>
-				<button class="btn btn-primary" id="addNewUser" name="addNewUser">Submit</button>
+				<button class="btn btn-outline-primary" id="addNewUser" name="addNewUser">Submit</button>
 			</form>
 		</div>
 	<div class="col"></div>

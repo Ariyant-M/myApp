@@ -30,7 +30,7 @@
 				  <label for="emailBody" class="form-label">Message</label>
 				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
 				</div>
-				<button class="btn btn-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
+				<button class="btn btn-outline-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
 			</div>
 			<div class="col"></div>
 		</div>
@@ -40,7 +40,7 @@
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="product.cfm">myApp</a>
 		      <div class="d-flex">
-		        <button class="btn btn-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
+		        <button class="btn btn-outline-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
 		      </div>
 		    </div>
 		</nav>
@@ -56,7 +56,7 @@
 				  <label for="emailBody" class="form-label">Message</label>
 				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
 				</div>
-				<button class="btn btn-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
+				<button class="btn btn-outline-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
 			</div>
 			<div class="col"></div>
 		</div>

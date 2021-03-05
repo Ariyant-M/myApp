@@ -54,6 +54,9 @@ footer{
 #ExportPDF{
   cursor: pointer;
 }
+#ExportExcel{
+  cursor: pointer;
+}
 
 .float-right{
   width: 100%

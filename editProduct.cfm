@@ -21,8 +21,8 @@
 					<label for="productDetails" class="form-label">Details</label>
 					<textarea class="form-control" id="productDetails" name = "productDetails" rows="3" required="true">#productList.FLD_PRODUCTDETAILS#</textarea>
 					</div>
-					<button class="btn btn-primary" id="confirmEdit" name="confirmEdit">Submit</button>
-					<input class="btn btn-danger" id="Cancel" type="button" onclick="this.form.reset();" value = "Reset">
+					<button class="btn btn-outline-primary" id="confirmEdit" name="confirmEdit">Submit <i class="fas fa-arrow-right"></i></button>
+					<input class="btn btn-outline-danger" id="Cancel" type="button" onclick="this.form.reset();" value = Reset>
 					</cfoutput>
 				</form>
 			<cfelse>

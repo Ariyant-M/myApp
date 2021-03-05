@@ -1,21 +1,22 @@
-html,body{
-	height: 100%;
-	margin: 0;
+#pdfTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
-.main-frame{
-	background: linear-gradient(180deg, rgba(64,63,63,1) 15%, rgba(0,0,0,1) 100%) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	color: white;
-	height: 100%;
-	padding: 30px;
+
+#pdfTable td, #pdfTable th {
+  border: 1px solid lightblue;
+  padding: 8px;
 }
-.center{
-	text-align: center;
-	font-family: 'Akaya Telivigala', cursive;
-}
-.left{
-	text-align: left;
+
+#pdfTable tr:nth-child(even){background: #f2f2f2;}
+
+#pdfTable tr:hover {background: #ddd;}
+
+#pdfTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: pink;
+  color: white;
 }

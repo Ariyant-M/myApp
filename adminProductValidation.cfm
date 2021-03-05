@@ -28,10 +28,10 @@
 			      <td>#FLD_PRODUCTDETAILS#</td>
 			      <td>#FLD_PRODUCTCREATOR#</td>
 			      <td>
-			      	<button class="btn btn-success" onclick="acceptProduct(this);">
+			      	<button class="btn btn-outline-success" onclick="acceptProduct(this);">
 			      		<i class="fas fa-check"></i>
 			      	</button>
-			      	<button class="btn btn-danger" onclick="rejectProduct(this);">
+			      	<button class="btn btn-outline-danger" onclick="rejectProduct(this);">
 			      		<i class="fas fa-times"></i>
 			      	</button>
 			      </td>
