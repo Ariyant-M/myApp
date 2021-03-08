@@ -85,7 +85,6 @@
 							border-collapse: collapse;
 						}
 					</style>
-					<cfset local.allProductData = createObject('component', 'components.getProductDetails').getAllProduct()>
 					<table id="pdfTable">
 						<tr>
 							<th>ProductID</th>
@@ -94,7 +93,7 @@
 							<th>Created by</th>
 							<th>Created on</th>
 						</tr>
-						<cfoutput query="local.allProductData">
+						<cfoutput query="session.filteredProdut">
 							<tr>
 								<td>#FLD_PRODUCTID#</td>
 								<td>#FLD_PRODUCTNAME#</td>

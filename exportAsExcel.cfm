@@ -5,7 +5,7 @@
 			<cfif "#url.productID#" NEQ "null">
 				<cfset local.productData = createObject('component', 'components.getProductDetails').getProductByID(#url.productID#)>
 			<cfelse>
-				<cfset local.productData = createObject('component', 'components.getProductDetails').getAllProduct()>
+				<cfset local.productData = session.filteredProdut>
 			</cfif>
 
 

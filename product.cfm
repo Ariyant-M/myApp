@@ -116,13 +116,19 @@
 		  </div>
 		</div>
 		<div class="container">
-			<cfset local.productList = createObject("component", "components.getProductDetails").getAllProduct()>
+			<cfif NOT isDefined("application.allProductList")>
+				<cfset application.allProductList = createObject("component", "components.getProductDetails").getAllProduct()>
+				<cfset local.productList = application.allProductList>
+			</cfif>
 			<cfif isDefined("url.startdate")>
 				<cfset local.filterStartDate = #url.startdate#>
 				<cfset local.filterEndDate = #url.enddate#>
 				<cfset local.filterKeyword = #url.keyword#>
-				<cfset local.productList = createObject("component", "components.getProductDetails").getFilteredProductList(#local.filterStartDate#,#local.filterEndDate#,#local.filterKeyword#)>
+				<cfset local.productList = createObject("component", "components.getProductDetails").getFilteredProductList(local.filterStartDate,local.filterEndDate,local.filterKeyword)>
+			<cfelse>
+				<cfset local.productList = application.allProductList>
 			</cfif>
+			<cfset session.filteredProdut = local.productList>
 			<cfif local.productList.RecordCount EQ 0>
 				<div class="alert alert-danger" role="alert">
 				  No product Found :(
