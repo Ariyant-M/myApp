@@ -4,7 +4,12 @@
 	<cfif session.loggeduser.role NEQ 'admin'>
 		<cflocation url="product.cfm">
 	</cfif>
-	<cfmodule template="customTags/adminNav.cfm">
+	<cfmodule template="customTags/defaultLoggedINNav.cfm">
+		<button class="btn btn-outline-primary" id="addNew">New Product <i class="fas fa-plus"></i></button>
+		<button type="button" class="btn btn-outline-primary" id="adminPanel">
+			Admin Panel <i class="fas fa-user-cog"></i>
+		</button>
+	</cfmodule>
 	<div class="container">
 		<cfset local.a = createObject("component", "components.getProductDetails").getProductForVerification()>
 		<table class="table table-sm table-dark">
@@ -43,6 +48,6 @@
 		  </div>
 		</table>
 	</div>
-</cfmodule>
+	<script src="JavaScript/product.js"></script>
 	<script type="text/javascript" src="JavaScript/admin.js"></script>
 </cfmodule>

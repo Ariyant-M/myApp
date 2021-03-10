@@ -31,12 +31,18 @@
 				        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
-				      <div class="modal-body">
+				      <div class="modal-body center">
+				      	<h1><i class="fas fa-trash"></i></h1>
+				      	<br>
 				        Are you sure, data will be deleted permanently..
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancel</button>
-				        <button type="button" class="btn btn-outline-danger" id="confirmDelete">Delete</button>
+				        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+				        	Cancel <i class="fas fa-times"></i>
+				        </button>
+				        <button type="button" class="btn btn-outline-danger" id="confirmDelete">
+				        	Delete <i class="fas fa-trash-alt"></i>
+				        </button>
 				      </div>
 				    </div>
 				  </div>
@@ -116,17 +122,13 @@
 		  </div>
 		</div>
 		<div class="container">
-			<cfif NOT isDefined("application.allProductList")>
-				<cfset application.allProductList = createObject("component", "components.getProductDetails").getAllProduct()>
-				<cfset local.productList = application.allProductList>
-			</cfif>
 			<cfif isDefined("url.startdate")>
 				<cfset local.filterStartDate = #url.startdate#>
 				<cfset local.filterEndDate = #url.enddate#>
 				<cfset local.filterKeyword = #url.keyword#>
 				<cfset local.productList = createObject("component", "components.getProductDetails").getFilteredProductList(local.filterStartDate,local.filterEndDate,local.filterKeyword)>
 			<cfelse>
-				<cfset local.productList = application.allProductList>
+				<cfset local.productList = createObject("component", "components.getProductDetails").getAllProduct()>
 			</cfif>
 			<cfset session.filteredProdut = local.productList>
 			<cfif local.productList.RecordCount EQ 0>
@@ -155,5 +157,5 @@
 	    </div>
 	</cfif>
 	<!-- javascript -->
-<script src="JavaScript/product.js"></script>
+	<script src="JavaScript/product.js"></script>
   </cfmodule>

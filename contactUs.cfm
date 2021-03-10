@@ -13,55 +13,45 @@
 </head>
 <body>
 	<cfif isDefined("session.LoggedUser")>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="product.cfm">myApp</a>
-		  </div>
-		</nav>
-		<cfform>
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-6">
-				<div class="mb-3">
-				  <label for="senderEmail" class="form-label">Email address</label>
-				  <cfinput type="email" class="form-control" name="senderEmail" id="senderEmail" value = "#session.LoggedUser.USEREMAIL#" disabled>
-				</div>
-				<div class="mb-3">
-				  <label for="emailBody" class="form-label">Message</label>
-				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
-				</div>
-				<button class="btn btn-outline-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
-			</div>
-			<div class="col"></div>
-		</div>
-	</cfform>
+		<cfmodule template="customTags/defaultLoggedINNav.cfm">
+		</cfmodule>
 	<cfelse>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
-		    <a class="navbar-brand" href="product.cfm">myApp</a>
+		    <a class="navbar-brand" href="index.cfm">myApp</a>
 		      <div class="d-flex">
 		        <button class="btn btn-outline-primary" id="registration">Sign Up <i class="fas fa-user-plus"></i></button>
 		      </div>
 		    </div>
 		</nav>
-		<form>
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-6">
+	</cfif> 
+	<cfform>
+	<div class="row">
+		<div class="col"></div>
+		<div class="col-6">
+			<cfif isDefined("session.LoggedUser")>
+				<div class="mb-3">
+				  <label for="senderEmail" class="form-label">Email address</label>
+				  <cfinput type="email" class="form-control" name="senderEmail" id="senderEmail" value = "#session.LoggedUser.USEREMAIL#" disabled>
+				</div>
+			<cfelse>
 				<div class="mb-3">
 				  <label for="senderEmail" class="form-label">Email address</label>
 				  <input type="email" class="form-control" name="senderEmail" id="senderEmail" required="true" placeholder="Your email">
 				</div>
-				<div class="mb-3">
-				  <label for="emailBody" class="form-label">Message</label>
-				  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
-				</div>
-				<button class="btn btn-outline-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
+			</cfif>
+			<div class="mb-3">
+			  <label for="feedbackSubject" class="form-label">Subject</label>
+			  <input type="email" class="form-control" name="feedbackSubject" id="feedbackSubject" required="true" >
 			</div>
-			<div class="col"></div>
+			<div class="mb-3">
+			  <label for="emailBody" class="form-label">Message</label>
+			  <textarea class="form-control" name="emailBody" id="emailBody" required="true" rows="3"></textarea>
+			</div>
+			<button class="btn btn-outline-primary" onclick="addFeedBack();">Send <i class="fas fa-paper-plane"></i></button>
 		</div>
-	</form>
-	</cfif>
-	
+		<div class="col"></div>
+	</div>
+	</cfform>
 </body>
 </html>
